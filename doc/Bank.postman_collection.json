@@ -1,20 +1,20 @@
 {
 	"info": {
-		"_postman_id": "fa98eddb-d28b-45ef-941e-fbdf43dc97f7",
+		"_postman_id": "472e6372-1606-4aa9-b5db-277604a2481f",
 		"name": "Bank",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "accounts",
+			"name": "bank_accounts",
 			"item": [
 				{
-					"name": "Accounts - Index",
+					"name": "Bank Accounts - Index",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/accounts",
+							"raw": "http://localhost:3000/api/v1/bank_accounts",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -23,20 +23,20 @@
 							"path": [
 								"api",
 								"v1",
-								"accounts"
+								"bank_accounts"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Account - Create",
+					"name": "Bank Account - Create",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"holder_id\": \"ABC\",\n  \"type\": \"normal\"\n}",
+							"raw": "{\n  \"account_holder_id\": \"ABC\",\n  \"type\": \"current\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -44,7 +44,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/accounts",
+							"raw": "http://localhost:3000/api/v1/bank_accounts",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -53,19 +53,19 @@
 							"path": [
 								"api",
 								"v1",
-								"accounts"
+								"bank_accounts"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Account - Show",
+					"name": "Bank Account - Show",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/accounts/1234",
+							"raw": "http://localhost:3000/api/v1/bank_accounts/1234",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -74,7 +74,7 @@
 							"path": [
 								"api",
 								"v1",
-								"accounts",
+								"bank_accounts",
 								"1234"
 							]
 						}
@@ -82,12 +82,12 @@
 					"response": []
 				},
 				{
-					"name": "Account - Delete",
+					"name": "Bank Account - Delete",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/accounts/1234",
+							"raw": "http://localhost:3000/api/v1/bank_accounts/1234",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -96,7 +96,7 @@
 							"path": [
 								"api",
 								"v1",
-								"accounts",
+								"bank_accounts",
 								"1234"
 							]
 						}
@@ -106,15 +106,15 @@
 			]
 		},
 		{
-			"name": "holders",
+			"name": "account_holders",
 			"item": [
 				{
-					"name": "Holders - Index",
+					"name": "Account Holders - Index",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/holders",
+							"raw": "http://localhost:3000/api/v1/account_holders",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -123,14 +123,14 @@
 							"path": [
 								"api",
 								"v1",
-								"holders"
+								"account_holders"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Holder - Create",
+					"name": "Account Holder - Create",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -144,7 +144,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/holders",
+							"raw": "http://localhost:3000/api/v1/account_holders",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -153,19 +153,19 @@
 							"path": [
 								"api",
 								"v1",
-								"holders"
+								"account_holders"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Holder - Show",
+					"name": "Account Holder - Show",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/holders/1234",
+							"raw": "http://localhost:3000/api/v1/account_holders/1234",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -174,7 +174,7 @@
 							"path": [
 								"api",
 								"v1",
-								"holders",
+								"account_holders",
 								"1234"
 							]
 						}
