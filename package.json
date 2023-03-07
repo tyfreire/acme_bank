@@ -1,0 +1,15 @@
+{
+  "name": "acme_bank",
+  "version": "1.0.0",
+  "description": "Acme Bank creating and managing bank accounts",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
