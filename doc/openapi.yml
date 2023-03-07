@@ -6,19 +6,19 @@ info:
 servers:
   - url: https://localhost:3000/api/v1
 tags:
-  - name: account
-    description: Account operations
-  - name: holder
+  - name: bank_account
+    description: Bank account operations
+  - name: account_holder
     description: Account holder operations
 paths:
-  /accounts:
+  /bank_accounts:
     get:
       tags:
-        - account
-      summary: List accounts
-      operationId: accountIndex
+        - bank_account
+      summary: List bank accounts
+      operationId: bankAccountIndex
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -33,22 +33,22 @@ paths:
                     type:
                       type: string
                       enum:
-                        - normal
+                        - current
                         - savings
-                      example: normal
+                      example: current
                     status:
                       type: string
                       enum:
                         - open
                         - closed
                       example: open
-                    holder:
+                    account_holder:
                       type: object
                       properties:
                         id:
                           type: integer
                           example: 22
-                        name: 
+                        name:
                           type: string
                           example: John Doe
                         age:
@@ -56,27 +56,27 @@ paths:
                           example: 87
     post:
       tags:
-        - account
+        - bank_account
       summary: Create new bank account
-      operationId: accountCreate
+      operationId: bankAccountCreate
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                holder_id:
+                account_holder_id:
                   type: integer
                   example: 22
                 type:
                   type: string
                   enum:
-                    - normal
+                    - current
                     - savings
-                  example: normal
+                  example: current
         required: true
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -89,19 +89,19 @@ paths:
                   type:
                     type: string
                     enum:
-                      - normal
+                      - current
                       - savings
-                    example: normal
+                    example: current
                   status:
                     type: string
                     enum:
                       - open
                       - closed
                     example: open
-                  holder_id:
+                  account_holder_id:
                     type: integer
                     example: 22
-        '422':
+        "422":
           description: Invalid input
           content:
             application/json:
@@ -116,7 +116,7 @@ paths:
                         message:
                           type: string
                           example: Account holder already has an account of this type
-        '404':
+        "404":
           description: Invalid input
           content:
             application/json:
@@ -131,21 +131,21 @@ paths:
                         message:
                           type: string
                           example: Account holder could not be found
-  /accounts/{id}:
+  /bank_accounts/{id}:
     get:
       tags:
-        - account
-      summary: Show account details
-      operationId: accountShow
+        - bank_account
+      summary: Show bank account details
+      operationId: bankAccountShow
       parameters:
         - name: id
           in: path
-          description: Account Identifier
+          description: Bank account Identifier
           required: true
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -158,19 +158,19 @@ paths:
                   type:
                     type: string
                     enum:
-                      - normal
+                      - current
                       - savings
-                    example: normal
+                    example: current
                   status:
                     type: string
                     enum:
                       - open
                       - closed
                     example: open
-                  holder_id:
+                  account_holder_id:
                     type: integer
                     example: 22
-        '404':
+        "404":
           description: Invalid input
           content:
             application/json:
@@ -184,21 +184,21 @@ paths:
                       properties:
                         message:
                           type: string
-                          example: Account could not be found
+                          example: Bank account could not be found
     delete:
       tags:
-        - account
-      summary: Close account
-      operationId: accountDelete
+        - bank_account
+      summary: Close bank account
+      operationId: bankAccountDelete
       parameters:
         - name: id
           in: path
-          description: Account Identifier
+          description: Bank account Identifier
           required: true
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -211,18 +211,18 @@ paths:
                   type:
                     type: string
                     enum:
-                      - normal
+                      - current
                       - savings
-                    example: normal
+                    example: current
                   status:
                     type: string
                     enum:
                       - closed
                     example: closed
-                  holder_id:
+                  account_holder_id:
                     type: integer
                     example: 22
-        '404':
+        "404":
           description: Invalid input
           content:
             application/json:
@@ -236,8 +236,8 @@ paths:
                       properties:
                         message:
                           type: string
-                          example: Account could not be found
-        '422':
+                          example: Bank account could not be found
+        "422":
           description: Invalid input
           content:
             application/json:
@@ -251,15 +251,15 @@ paths:
                       properties:
                         message:
                           type: string
-                          example: Account is already closed
-  /holders:
+                          example: Bank account is already closed
+  /account_holders:
     get:
       tags:
-        - holder
-      summary: List holders
-      operationId: holderIndex
+        - account_holder
+      summary: List account holders
+      operationId: accountHolderIndex
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -271,7 +271,7 @@ paths:
                     id:
                       type: integer
                       example: 22
-                    name: 
+                    name:
                       type: string
                       example: John Doe
                     age:
@@ -279,9 +279,9 @@ paths:
                       example: 87
     post:
       tags:
-        - holder
+        - account_holder
       summary: Create new account holder
-      operationId: holderCreate
+      operationId: accountHolderCreate
       requestBody:
         content:
           application/json:
@@ -296,7 +296,7 @@ paths:
                   example: 87
         required: true
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -312,7 +312,7 @@ paths:
                   age:
                     type: integer
                     example: 87
-        '400':
+        "400":
           description: Invalid input
           content:
             application/json:
@@ -327,12 +327,12 @@ paths:
                         message:
                           type: string
                           example: field name cannot be blank
-  /holders/{id}:
+  /account_holders/{id}:
     get:
       tags:
-        - holder
-      summary: Show holder account details
-      operationId: holderShow
+        - account_holder
+      summary: Show account holder details
+      operationId: accountHolderShow
       parameters:
         - name: id
           in: path
@@ -341,7 +341,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -357,7 +357,7 @@ paths:
                   age:
                     type: integer
                     example: 87
-        '404':
+        "404":
           description: Invalid input
           content:
             application/json:
