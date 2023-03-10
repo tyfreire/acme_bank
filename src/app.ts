@@ -7,4 +7,4 @@ app.use(json());
 
 app.use("/api/v1", healthCheckRoutes);
 
-app.listen(3000);
+export default app;
