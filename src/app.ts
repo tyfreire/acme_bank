@@ -5,6 +5,6 @@ import { json } from "body-parser";
 const app = express();
 app.use(json());
 
-app.use("/api/v1", healthCheckRoutes);
+app.use("/api/v1/health-check", healthCheckRoutes);
 
 export default app;
