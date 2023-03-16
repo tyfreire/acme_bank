@@ -14,3 +14,4 @@ This sample projects is about bank accounts and its management
 ### Requirements
 
 - `node 19.4`
+- create files `.env` and `.env.test` based on `.env.example`
