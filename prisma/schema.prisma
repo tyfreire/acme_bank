@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model AccountHolder {
+model account_holder {
   id    Int     @id @default(autoincrement())
   name  String
   age  Int
