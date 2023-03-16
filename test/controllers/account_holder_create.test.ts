@@ -10,6 +10,8 @@ describe("POST /api/v1/account_holders", () => {
       .set("Accept", "application/json");
 
     expect(response.statusCode).toBe(200);
+    expect(response.body.name).toBe("john");
+    expect(response.body.age).toBe(40);
 
     const users = await client.account_holder.findMany();
     const user = users[0];
