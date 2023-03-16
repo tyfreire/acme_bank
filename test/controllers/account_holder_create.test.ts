@@ -11,7 +11,7 @@ describe("POST /api/v1/account_holders", () => {
 
     expect(response.statusCode).toBe(200);
 
-    const users = await client.accountHolder.findMany();
+    const users = await client.account_holder.findMany();
     const user = users[0];
     expect(user).not.toBeUndefined();
     expect(user.id).not.toBeNull();
