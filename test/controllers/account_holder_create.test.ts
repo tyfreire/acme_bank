@@ -20,4 +20,20 @@ describe("POST /api/v1/account_holders", () => {
     expect(user.name).toEqual("john");
     expect(user.age).toEqual(40);
   });
+
+  test("returns error when there is an invalid field", async () => {
+    const response = await request(app)
+      .post("/api/v1/account_holders")
+      .send({ name: "jack", age: -19 })
+      .set("Accept", "application/json");
+
+    expect(response.statusCode).toBe(400);
+
+    expect(response.body.errors).toEqual([
+      {
+        message: "cannot be less than 0",
+        field: "age",
+      },
+    ]);
+  });
 });
