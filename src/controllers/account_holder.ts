@@ -19,7 +19,23 @@ export const create: RequestHandler = async (req, res, _next) => {
     });
   }
 };
+
 export const index: RequestHandler = async (_req, res, _next) => {
   const account_holders = await client.account_holder.findMany();
   res.status(200).json(account_holders);
+};
+
+export const show: RequestHandler = async (req, res, _next) => {
+  const id: number = +req.params.id;
+  const account_holder = await client.account_holder.findUnique({
+    where: { id: id },
+  });
+
+  if (account_holder) {
+    res.status(200).json(account_holder);
+  } else {
+    res
+      .status(404)
+      .json({ errors: [{ field: "id", message: "could not be found" }] });
+  }
 };
