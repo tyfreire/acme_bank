@@ -57,3 +57,29 @@ async function insert_account_holder(name: string, age: number) {
     data: { name, age },
   });
 }
+
+describe("GET /api/v1/account_holders/id", () => {
+  test("#show account holder details by using id and return 200", async () => {
+    let user = await insert_account_holder("John", 33);
+
+    const response = await request(app).get(
+      `/api/v1/account_holders/${user.id}`
+    );
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(user);
+  });
+  test("renders 404 when record is not found", async () => {
+    const response = await request(app).get("/api/v1/account_holders/0");
+
+    expect(response.statusCode).toBe(404);
+    expect(response.body).toEqual({
+      errors: [
+        {
+          field: "id",
+          message: "could not be found",
+        },
+      ],
+    });
+  });
+});
