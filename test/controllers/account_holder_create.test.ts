@@ -37,3 +37,23 @@ describe("POST /api/v1/account_holders", () => {
     ]);
   });
 });
+
+describe("GET /api/v1/account_holders", () => {
+  test("#index list all account holders and return 200", async () => {
+    let user1 = await insert_account_holder("John", 33);
+    let user2 = await insert_account_holder("Jane", 44);
+
+    const response = await request(app).get("/api/v1/account_holders");
+
+    expect(response.statusCode).toBe(200);
+
+    expect(response.body).toContainEqual(user1);
+    expect(response.body).toContainEqual(user2);
+  });
+});
+
+async function insert_account_holder(name: string, age: number) {
+  return await client.account_holder.create({
+    data: { name, age },
+  });
+}

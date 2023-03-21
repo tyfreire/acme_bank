@@ -19,3 +19,7 @@ export const create: RequestHandler = async (req, res, _next) => {
     });
   }
 };
+export const index: RequestHandler = async (_req, res, _next) => {
+  const account_holders = await client.account_holder.findMany();
+  res.status(200).json(account_holders);
+};
