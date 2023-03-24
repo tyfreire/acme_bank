@@ -1,12 +1,8 @@
 import request from "supertest";
 import app from "../../src/app";
 import client from "../../src/client";
+import { insert_account_holder } from "./helper.test";
 
-async function insert_account_holder(name: string, age: number) {
-  return await client.account_holder.create({
-    data: { name, age },
-  });
-}
 describe("POST /api/v1/account_holders", () => {
   test("creates account holder and return 200", async () => {
     const response = await request(app)
