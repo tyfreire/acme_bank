@@ -2,6 +2,11 @@ import request from "supertest";
 import app from "../../src/app";
 import client from "../../src/client";
 
+async function insert_account_holder(name: string, age: number) {
+  return await client.account_holder.create({
+    data: { name, age },
+  });
+}
 describe("POST /api/v1/account_holders", () => {
   test("creates account holder and return 200", async () => {
     const response = await request(app)
@@ -51,12 +56,6 @@ describe("GET /api/v1/account_holders", () => {
     expect(response.body).toContainEqual(user2);
   });
 });
-
-async function insert_account_holder(name: string, age: number) {
-  return await client.account_holder.create({
-    data: { name, age },
-  });
-}
 
 describe("GET /api/v1/account_holders/id", () => {
   test("#show account holder details by using id and return 200", async () => {
