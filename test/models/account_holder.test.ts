@@ -28,11 +28,6 @@ describe("account holder class", () => {
 
       expect(account_holder.validate()).toBe(false);
     });
-    // test("returns false when age is empty string", () => {
-    //   const account_holder = new AccountHolder("John", "");
-
-    //   expect().toBe(false);
-    // });
   });
   describe("#errors", () => {
     test("populate errors array upon invalid results", () => {
@@ -45,15 +40,15 @@ describe("account holder class", () => {
       expect(account_holder.errors).toEqual([
         { message: "cannot be less than 0", field: "age" },
       ]);
-    }),
-      test("in case results are valid there should be no errors", () => {
-        const account_holder = new AccountHolder("John", 87);
+    });
+    test("in case results are valid there should be no errors", () => {
+      const account_holder = new AccountHolder("John", 87);
 
-        let result = account_holder.validate();
-        expect(result).toBe(true);
+      let result = account_holder.validate();
+      expect(result).toBe(true);
 
-        expect(account_holder.errors).toEqual([]);
-      });
+      expect(account_holder.errors).toEqual([]);
+    });
   }),
     test("in case multiple fields are invalid there should be multiple errors", () => {
       const account_holder = new AccountHolder("", -17);
