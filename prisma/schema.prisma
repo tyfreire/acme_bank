@@ -11,7 +11,26 @@ datasource db {
 }
 
 model account_holder {
-  id    Int     @id @default(autoincrement())
-  name  String
-  age  Int
+  id            Int            @id @default(autoincrement())
+  name          String
+  age           Int
+  bank_accounts bank_account[]
+}
+
+model bank_account {
+  id                Int               @id @default(autoincrement())
+  type              bank_account_type
+  status            bank_account_status
+  account_holder    account_holder?   @relation(fields: [account_holder_id], references: [id])
+  account_holder_id Int
+}
+
+enum bank_account_type {
+  CURRENT
+  SAVINGS
+}
+
+enum bank_account_status {
+  OPEN
+  CLOSE
 }
