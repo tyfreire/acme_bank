@@ -9,6 +9,6 @@ app.use(json());
 
 app.use("/api/v1/health-check", healthCheckRoutes);
 app.use("/api/v1/account_holders", accountHoldersRoutes);
-app.use("/api/v1/bank_accounst", bankAccountRoutes);
+app.use("/api/v1/bank_accounts", bankAccountRoutes);
 
 export default app;
