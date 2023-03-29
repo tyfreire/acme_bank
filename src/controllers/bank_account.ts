@@ -8,9 +8,19 @@ export const create: RequestHandler = async (req, res, _next) => {
 
   let bank_account = new BankAccount(account_holder_id, type);
 
-  const bank_account_1 = await client.bank_account.create({
-    data: bank_account,
-  });
+  if (await bank_account.validate()) {
+    const bank_account_1 = await client.bank_account.create({
+      data: {
+        account_holder_id: bank_account.account_holder_id,
+        type: bank_account.type,
+        status: bank_account.status,
+      },
+    });
 
-  res.status(200).json(bank_account_1);
+    res.status(200).json(bank_account_1);
+  } else {
+    res.status(422).json({
+      errors: bank_account.errors,
+    });
+  }
 };
