@@ -132,21 +132,9 @@ paths:
                         message:
                           type: string
                           example: Account holder already has an account of this type
-        "404":
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        message:
+                        field:
                           type: string
-                          example: Account holder could not be found
+                          example: account_holder_id
   /bank_accounts/{id}:
     get:
       tags:
@@ -201,6 +189,9 @@ paths:
                         message:
                           type: string
                           example: Bank account could not be found
+                        field:
+                          type: number
+                          example: account_holder_id
     delete:
       tags:
         - bank_account
@@ -253,6 +244,9 @@ paths:
                         message:
                           type: string
                           example: Bank account could not be found
+                        field:
+                          type: number
+                          example: account_holder_id
         "422":
           description: Invalid input
           content:
@@ -268,6 +262,10 @@ paths:
                         message:
                           type: string
                           example: Bank account is already closed
+                        field:
+                          type: number
+                          example: account_holder_id
+
   /account_holders:
     get:
       tags:
@@ -343,6 +341,9 @@ paths:
                         message:
                           type: string
                           example: field name cannot be blank
+                        field:
+                          type: string
+                          example: name
   /account_holders/{id}:
     get:
       tags:
@@ -388,3 +389,6 @@ paths:
                         message:
                           type: string
                           example: Account holder could not be found
+                        field:
+                          type: number
+                          example: account_holder_id
