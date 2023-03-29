@@ -49,15 +49,15 @@ paths:
                     type:
                       type: string
                       enum:
-                        - current
-                        - savings
-                      example: current
+                        - CURRENT
+                        - SAVINGS
+                      example: CURRENT
                     status:
                       type: string
                       enum:
-                        - open
-                        - closed
-                      example: open
+                        - OPEN
+                        - CLOSED
+                      example: OPEN
                     account_holder:
                       type: object
                       properties:
@@ -87,9 +87,9 @@ paths:
                 type:
                   type: string
                   enum:
-                    - current
-                    - savings
-                  example: current
+                    - CURRENT
+                    - SAVINGS
+                  example: CURRENT
         required: true
       responses:
         "200":
@@ -105,15 +105,15 @@ paths:
                   type:
                     type: string
                     enum:
-                      - current
-                      - savings
-                    example: current
+                      - CURRENT
+                      - SAVINGS
+                    example: CURRENT
                   status:
                     type: string
                     enum:
-                      - open
-                      - closed
-                    example: open
+                      - OPEN
+                      - CLOSED
+                    example: OPEN
                   account_holder_id:
                     type: integer
                     example: 22
@@ -174,15 +174,15 @@ paths:
                   type:
                     type: string
                     enum:
-                      - current
-                      - savings
-                    example: current
+                      - CURRENT
+                      - SAVINGS
+                    example: CURRENT
                   status:
                     type: string
                     enum:
-                      - open
-                      - closed
-                    example: open
+                      - OPEN
+                      - CLOSED
+                    example: OPEN
                   account_holder_id:
                     type: integer
                     example: 22
@@ -227,14 +227,14 @@ paths:
                   type:
                     type: string
                     enum:
-                      - current
-                      - savings
-                    example: current
+                      - CURRENT
+                      - SAVINGS
+                    example: CURRENT
                   status:
                     type: string
                     enum:
-                      - closed
-                    example: closed
+                      - CLOSED
+                    example: CLOSED
                   account_holder_id:
                     type: integer
                     example: 22
