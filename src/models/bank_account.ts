@@ -1,4 +1,4 @@
-type ValidateError = { field: string; message: string };
+import { ValidateError } from "./validate_error";
 
 import { bank_account_status, bank_account_type } from "@prisma/client";
 import client from "../client";
