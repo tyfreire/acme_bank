@@ -1,7 +1,8 @@
+import { bank_account_status, bank_account_type } from "@prisma/client";
 import request from "supertest";
 import app from "../../src/app";
-//import client from "../../src/client";
-import { insert_account_holder } from "./helper.test";
+import client from "../../src/client";
+import { insert_account_holder, insert_bank_account } from "./helper.test";
 
 describe("POST /api/v1/bank_accounts", () => {
   test("creates bank account and return 200", async () => {
@@ -9,25 +10,69 @@ describe("POST /api/v1/bank_accounts", () => {
 
     const response = await request(app)
       .post("/api/v1/bank_accounts")
-      .send({ type: "current", account_holder_id: account_holder.id })
+      .send({
+        type: bank_account_type.CURRENT,
+        account_holder_id: account_holder.id,
+      })
       .set("Accept", "application/json");
 
     expect(response.statusCode).toBe(200);
 
     //body
     expect(response.body.id).toBeTruthy();
-    expect(response.body.type).toBe("current");
-    expect(response.body.status).toBe("open");
+    expect(response.body.type).toBe(bank_account_type.CURRENT);
+    expect(response.body.status).toBe(bank_account_status.OPEN);
     expect(response.body.account_holder_id).toBe(account_holder.id);
 
     //db
-    // const accounts = await client.bank_account.findMany();
-    // const account = accounts[0];
-    // expect(account).toBeTruthy();
-    // expect(account.type).toBe("current");
-    // expect(account.status).toBe("open");
-    // expect(account.account_holder_id).toBe(1);
+    const account = await client.bank_account.findFirst({
+      where: { account_holder_id: account_holder.id },
+    });
+
+    expect(account).toBeTruthy();
+    expect(account!.type).toBe(bank_account_type.CURRENT);
+    expect(account!.status).toBe(bank_account_status.OPEN);
+    expect(account!.account_holder_id).toBe(account_holder.id);
   });
-  xtest("returns error when account holder is not found", () => {});
-  xtest("returns error when account holder attempt to duplicate accounts ", () => {});
+
+  test("returns error when account holder not found", async () => {
+    const response = await request(app)
+      .post("/api/v1/bank_accounts")
+      .send({
+        type: bank_account_type.CURRENT,
+        account_holder_id: 0,
+      })
+      .set("Accept", "application/json");
+
+    expect(response.statusCode).toBe(422);
+
+    expect(response.body.errors).toEqual([
+      {
+        message: "could not be found",
+        field: "account_holder_id",
+      },
+    ]);
+  });
+
+  test("returns error when account holder attempt to duplicate accounts ", async () => {
+    const account_holder = await insert_account_holder("johny", 55);
+    await insert_bank_account(account_holder.id, bank_account_type.CURRENT);
+
+    const response = await request(app)
+      .post("/api/v1/bank_accounts")
+      .send({
+        bank_account_type: bank_account_type.CURRENT,
+        account_holder_id: account_holder.id,
+      })
+      .set("Accept", "application/json");
+
+    expect(response.statusCode).toBe(422);
+
+    expect(response.body.errors).toEqual([
+      {
+        message: "Account holder already has an account of this type",
+        field: "account_holder_id",
+      },
+    ]);
+  });
 });
