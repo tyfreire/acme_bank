@@ -190,7 +190,7 @@ paths:
                           type: string
                           example: Bank account could not be found
                         field:
-                          type: number
+                          type: string
                           example: account_holder_id
     delete:
       tags:
@@ -245,7 +245,7 @@ paths:
                           type: string
                           example: Bank account could not be found
                         field:
-                          type: number
+                          type: string
                           example: account_holder_id
         "422":
           description: Invalid input
@@ -263,7 +263,7 @@ paths:
                           type: string
                           example: Bank account is already closed
                         field:
-                          type: number
+                          type: string
                           example: account_holder_id
 
   /account_holders:
@@ -390,5 +390,5 @@ paths:
                           type: string
                           example: Account holder could not be found
                         field:
-                          type: number
+                          type: string
                           example: account_holder_id
