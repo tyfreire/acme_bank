@@ -1,4 +1,4 @@
-type ValidateError = { field: string; message: string };
+import { ValidateError } from "./validate_error";
 
 export class AccountHolder {
   name: string;
