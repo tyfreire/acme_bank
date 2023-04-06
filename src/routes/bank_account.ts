@@ -1,9 +1,10 @@
 import { Router } from "express";
 
-import { create } from "../controllers/bank_account";
+import { create, index } from "../controllers/bank_account";
 
 const router = Router();
 
 router.post("/", create);
+router.get("/", index);
 
 export default router;
