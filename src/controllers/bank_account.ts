@@ -24,3 +24,7 @@ export const create: RequestHandler = async (req, res, _next) => {
     });
   }
 };
+export const index: RequestHandler = async (_req, res, _next) => {
+  const result = await client.bank_account.findMany();
+  res.status(200).json(result);
+};
