@@ -1,7 +1,11 @@
 import request from "supertest";
 import app from "../../src/app";
 import client from "../../src/client";
-import { insert_account_holder } from "./helper.test";
+import { insert_account_holder, database_cleanup } from "../helper";
+
+afterEach(async () => {
+  await database_cleanup();
+});
 
 describe("POST /api/v1/account_holders", () => {
   test("creates account holder and return 200", async () => {

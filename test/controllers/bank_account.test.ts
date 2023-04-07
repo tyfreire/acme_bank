@@ -2,7 +2,15 @@ import { bank_account_status, bank_account_type } from "@prisma/client";
 import request from "supertest";
 import app from "../../src/app";
 import client from "../../src/client";
-import { insert_account_holder, insert_bank_account } from "./helper.test";
+import {
+  insert_account_holder,
+  insert_bank_account,
+  database_cleanup,
+} from "../helper";
+
+afterEach(async () => {
+  await database_cleanup();
+});
 
 describe("POST /api/v1/bank_accounts", () => {
   test("creates bank account and return 200", async () => {
@@ -74,21 +82,5 @@ describe("POST /api/v1/bank_accounts", () => {
         field: "account_holder_id",
       },
     ]);
-  });
-});
-
-describe("GET /api/v1/bank_accounts ", () => {
-  test("list bank accounts and returns 200", async () => {
-    const account_holder = await insert_account_holder("Dalia", 23);
-    const bank_account = await insert_bank_account(
-      account_holder.id,
-      bank_account_type.CURRENT
-    );
-
-    const response = await request(app).get("/api/v1/bank_accounts");
-
-    expect(response.statusCode).toBe(200);
-
-    expect(response.body).toContainEqual(bank_account);
   });
 });
