@@ -84,3 +84,20 @@ describe("POST /api/v1/bank_accounts", () => {
     ]);
   });
 });
+
+describe("GET /api/v1/bank_accounts/id", () => {
+  test("shows bank account detail by id and return 200", async () => {
+    const account_holder = await insert_account_holder("Jane", 33);
+    const bank_account = await insert_bank_account(
+      account_holder.id,
+      bank_account_type.CURRENT
+    );
+
+    const response = await request(app).get(
+      `/api/v1/bank_accounts/${bank_account.id}`
+    );
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual(bank_account);
+  });
+});

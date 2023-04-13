@@ -28,3 +28,23 @@ export const index: RequestHandler = async (_req, res, _next) => {
   const result = await client.bank_account.findMany();
   res.status(200).json(result);
 };
+
+export const show: RequestHandler = async (req, res, _next) => {
+  const id: number = +req.params.id;
+  const bank_account = await client.bank_account.findUnique({
+    where: { id: id },
+  });
+
+  if (bank_account) {
+    res.status(200).json(bank_account);
+  } else {
+    res.status(404).json({
+      errors: [
+        {
+          field: "id",
+          message: "Bank account could not be found",
+        },
+      ],
+    });
+  }
+};
