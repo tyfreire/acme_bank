@@ -191,7 +191,7 @@ paths:
                           example: Bank account could not be found
                         field:
                           type: string
-                          example: account_holder_id
+                          example: id
     delete:
       tags:
         - bank_account
