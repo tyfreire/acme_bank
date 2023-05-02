@@ -46,3 +46,12 @@ export class BankAccount {
     return bank_account != null;
   }
 }
+
+export async function update_to_close(id: number) {
+  const updated_account = await client.bank_account.update({
+    where: { id: id },
+    data: { status: "CLOSE" },
+  });
+
+  return updated_account;
+}

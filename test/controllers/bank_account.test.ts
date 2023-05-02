@@ -101,3 +101,32 @@ describe("GET /api/v1/bank_accounts/id", () => {
     expect(response.body).toEqual(bank_account);
   });
 });
+
+describe("DELETE /api/v1/bank_accounts/id", () => {
+  test("updates bank account and returns 200", async () => {
+    let account_holder = await insert_account_holder("Frida", 25);
+    const bank_account = await insert_bank_account(
+      account_holder.id,
+      bank_account_type.CURRENT
+    );
+
+    let response = await request(app).delete(
+      `/api/v1/bank_accounts/${bank_account.id}`
+    );
+
+    expect(response.statusCode).toBe(200);
+
+    expect(response.body.status).toBe("CLOSE");
+  });
+  test("if id is not valid returns 404", async () => {
+    let response = await request(app).delete(`/api/v1/bank_accounts/0`);
+
+    expect(response.statusCode).toBe(404);
+    expect(response.body.errors).toEqual([
+      {
+        message: "Bank account could not be found",
+        field: "id",
+      },
+    ]);
+  });
+});
