@@ -49,15 +49,15 @@ paths:
                     type:
                       type: string
                       enum:
-                        - current
-                        - savings
-                      example: current
+                        - CURRENT
+                        - SAVINGS
+                      example: CURRENT
                     status:
                       type: string
                       enum:
-                        - open
-                        - closed
-                      example: open
+                        - OPEN
+                        - CLOSED
+                      example: OPEN
                     account_holder:
                       type: object
                       properties:
@@ -87,9 +87,9 @@ paths:
                 type:
                   type: string
                   enum:
-                    - current
-                    - savings
-                  example: current
+                    - CURRENT
+                    - SAVINGS
+                  example: CURRENT
         required: true
       responses:
         "200":
@@ -105,15 +105,15 @@ paths:
                   type:
                     type: string
                     enum:
-                      - current
-                      - savings
-                    example: current
+                      - CURRENT
+                      - SAVINGS
+                    example: CURRENT
                   status:
                     type: string
                     enum:
-                      - open
-                      - closed
-                    example: open
+                      - OPEN
+                      - CLOSED
+                    example: OPEN
                   account_holder_id:
                     type: integer
                     example: 22
@@ -132,21 +132,9 @@ paths:
                         message:
                           type: string
                           example: Account holder already has an account of this type
-        "404":
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        message:
+                        field:
                           type: string
-                          example: Account holder could not be found
+                          example: account_holder_id
   /bank_accounts/{id}:
     get:
       tags:
@@ -174,15 +162,15 @@ paths:
                   type:
                     type: string
                     enum:
-                      - current
-                      - savings
-                    example: current
+                      - CURRENT
+                      - SAVINGS
+                    example: CURRENT
                   status:
                     type: string
                     enum:
-                      - open
-                      - closed
-                    example: open
+                      - OPEN
+                      - CLOSED
+                    example: OPEN
                   account_holder_id:
                     type: integer
                     example: 22
@@ -201,6 +189,9 @@ paths:
                         message:
                           type: string
                           example: Bank account could not be found
+                        field:
+                          type: string
+                          example: id
     delete:
       tags:
         - bank_account
@@ -227,14 +218,14 @@ paths:
                   type:
                     type: string
                     enum:
-                      - current
-                      - savings
-                    example: current
+                      - CURRENT
+                      - SAVINGS
+                    example: CURRENT
                   status:
                     type: string
                     enum:
-                      - closed
-                    example: closed
+                      - CLOSED
+                    example: CLOSED
                   account_holder_id:
                     type: integer
                     example: 22
@@ -253,6 +244,9 @@ paths:
                         message:
                           type: string
                           example: Bank account could not be found
+                        field:
+                          type: string
+                          example: account_holder_id
         "422":
           description: Invalid input
           content:
@@ -268,6 +262,10 @@ paths:
                         message:
                           type: string
                           example: Bank account is already closed
+                        field:
+                          type: string
+                          example: account_holder_id
+
   /account_holders:
     get:
       tags:
@@ -343,6 +341,9 @@ paths:
                         message:
                           type: string
                           example: field name cannot be blank
+                        field:
+                          type: string
+                          example: name
   /account_holders/{id}:
     get:
       tags:
@@ -388,3 +389,6 @@ paths:
                         message:
                           type: string
                           example: Account holder could not be found
+                        field:
+                          type: string
+                          example: account_holder_id
