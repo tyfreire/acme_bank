@@ -116,7 +116,7 @@ describe("DELETE /api/v1/bank_accounts/id", () => {
 
     expect(response.statusCode).toBe(200);
 
-    expect(response.body.status).toBe("CLOSE");
+    expect(response.body.status).toBe("CLOSED");
   });
   test("if id is not valid returns 404", async () => {
     let response = await request(app).delete(`/api/v1/bank_accounts/0`);
