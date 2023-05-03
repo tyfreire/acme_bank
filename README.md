@@ -16,6 +16,9 @@ This sample projects is about bank accounts and its management
 - `node 19.4`
 - create files `.env` and `.env.test` based on `.env.example`
 
-### Tip about migrations for test environment
+### Migrations
 
-- run the comand: npx dotenv -e .env.test -- prisma migrate dev -> if new migration was generated in order to update test environment accordingly
+- Generate migration `npx prima migrate dev --name `
+
+- Run development environment `npx prisma migrate dev`
+- Run test environment `npx dotenv -e .env.test -- prisma migrate dev`
