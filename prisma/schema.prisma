@@ -32,5 +32,5 @@ enum bank_account_type {
 
 enum bank_account_status {
   OPEN
-  CLOSE
+  CLOSED
 }
